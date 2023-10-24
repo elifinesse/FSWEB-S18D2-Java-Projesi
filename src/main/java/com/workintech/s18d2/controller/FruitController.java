@@ -3,6 +3,7 @@ package com.workintech.s18d2.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.workintech.s18d2.entity.Fruit;
 import com.workintech.s18d2.services.FruitService;
 
+import jakarta.validation.constraints.Positive;
 
+@Validated
 @RestController
 @RequestMapping("/fruit")
 public class FruitController {
@@ -37,7 +40,7 @@ public class FruitController {
     }
 
     @GetMapping("/{id}")
-    public Fruit findById(@PathVariable int id){
+    public Fruit findById(@Positive @PathVariable int id){
         return fruitService.findById(id);
     }
 
@@ -47,12 +50,12 @@ public class FruitController {
     }
 
     @PostMapping("/")
-    public Fruit save(@RequestBody Fruit fruit){
+    public Fruit save(@Validated @RequestBody Fruit fruit){
         return fruitService.save(fruit);
     }
 
     @DeleteMapping("{id}")
-    public Fruit delete(@PathVariable int id){
+    public Fruit delete(@Positive @PathVariable int id){
         return fruitService.delete(id);
     }    
 }

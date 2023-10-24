@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.workintech.s18d2.doa.FruitRepository;
 import com.workintech.s18d2.entity.Fruit;
+import com.workintech.s18d2.exceptions.PlantException;
 
 @Service
 public class FruitServiceImpl implements FruitService{
@@ -25,7 +27,7 @@ public class FruitServiceImpl implements FruitService{
         if(optFruit.isPresent()){
             return optFruit.get();
         }
-        return null;
+        throw new PlantException("Fruit with this id (" + id + ") does not exist.", HttpStatus.NOT_FOUND);
     }
 
     @Override
