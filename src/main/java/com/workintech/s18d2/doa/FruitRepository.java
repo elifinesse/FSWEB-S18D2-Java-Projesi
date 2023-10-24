@@ -2,11 +2,12 @@ package com.workintech.s18d2.doa;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.workintech.s18d2.entity.Fruit;
 
-public interface FruitRepository {
+public interface FruitRepository extends JpaRepository<Fruit, Integer>{
      @Query("SELECT f FROM Fruit f ORDER BY f.price ASC")
     List<Fruit> findPriceAscending();
 
